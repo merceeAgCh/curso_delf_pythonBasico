@@ -48,10 +48,17 @@ def obtener_tabla_frecuencias(texto, stop_words):
             lista_limpia.append(palabras_resultantes[1])
         else:
             lista_limpia.append(palabra)
-    freciencias = {}
+    frecuencias = {}
     for palabra in lista_limpia:
         if palabra not in stop_words:
-            if palabra in freciencias:
-                freciencias[palabra] += 1
+            if palabra in frecuencias:
+                frecuencias[palabra] += 1
             else:
-                freciencias[palabra] = 1
+                frecuencias[palabra] = 1
+    a_borrar = []
+    for palabra in frecuencias:
+        if frecuencias[palabra] <3:
+            a_borrar.append(palabra)
+    for palabra in a_borrar:
+        del frecuencias[palabra]
+    return frecuencias
