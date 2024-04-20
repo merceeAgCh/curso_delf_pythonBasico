@@ -62,3 +62,20 @@ def obtener_tabla_frecuencias(texto, stop_words):
     for palabra in a_borrar:
         del frecuencias[palabra]
     return frecuencias
+def principalf():
+    texto = obtener_texto("noticia.txt")
+    stop_words = obtener_stopWords("spanish.txt")
+    STOPWORDS.update(stop_words)
+    wordcloud = WordCloud(background_color='white').generate(texto)
+    frecuencias = obtener_tabla_frecuencias(texto, stop_words)
+    plt.subplot(121)
+    plt.imshow(wordcloud)
+    plt.title("Nube de palabras")
+    plt.axis("off")
+    plt.subplot(122)
+    plt.bar(frecuencias.keys(), frecuencias.values())
+    plt.xticks(rotation=90)
+    plt.title("Frecuencias")
+    plt.savefig("frecuencias.png")
+    plt.show()
+principalf()
